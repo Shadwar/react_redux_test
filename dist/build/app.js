@@ -27211,9 +27211,13 @@ var items = function items() {
             }]);
 
         case _actions.ActionTypes.DELETE_ITEM:
-            return state.filter(function (item) {
+            var filtered = state.filter(function (item) {
                 return item.id != action.id;
             });
+            for (var i = 0; i < filtered.length; i++) {
+                filtered[i].id = i + 1;
+            }
+            return filtered;
 
         case _actions.ActionTypes.GET_ITEMS:
             return [].concat(_toConsumableArray(state), _toConsumableArray((0, _api.getItems)()));

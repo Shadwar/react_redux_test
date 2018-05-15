@@ -19,7 +19,11 @@ const items = (state=[], action) => {
             ];
 
         case ActionTypes.DELETE_ITEM:
-            return state.filter((item) => item.id != action.id);
+            const filtered = state.filter((item) => item.id != action.id);
+            for (let i = 0; i < filtered.length; i++) {
+                filtered[i].id = i+1;
+            }
+            return filtered;
         
         case ActionTypes.GET_ITEMS:
             return [...state, ...getItems()];
