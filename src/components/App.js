@@ -1,15 +1,17 @@
 import React from 'react';
 import NewItemForm from './NewItemForm';
 import ItemList from './ItemList';
+import { connect } from 'react-redux';
+import { addItem } from '../actions';
 
 /**
  * Главный класс приложения.
  */
-export default class App extends React.Component {
+class App extends React.Component {
     render() {
         return (
             <div>
-                <NewItemForm/>
+                <NewItemForm actionAdd={(title, barcode) => this.props.dispatch(addItem(title, barcode))}/>
                 <ItemList 
                     items={
                         [
@@ -23,3 +25,5 @@ export default class App extends React.Component {
         );
     }
 }
+
+export default connect(store => store)(App);

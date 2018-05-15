@@ -21760,6 +21760,38 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/redux-devtools-extension/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/redux-devtools-extension/index.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var compose = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js").compose;
+
+exports.__esModule = true;
+exports.composeWithDevTools = (
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :
+    function() {
+      if (arguments.length === 0) return undefined;
+      if (typeof arguments[0] === 'object') return compose;
+      return compose.apply(null, arguments);
+    }
+);
+
+exports.devToolsEnhancer = (
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION__ :
+    function() { return function(noop) { return noop; } }
+);
+
+
+/***/ }),
+
 /***/ "./node_modules/redux/es/redux.js":
 /*!****************************************!*\
   !*** ./node_modules/redux/es/redux.js ***!
@@ -26460,6 +26492,49 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./src/actions/index.js":
+/*!******************************!*\
+  !*** ./src/actions/index.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var ActionTypes = exports.ActionTypes = {
+    ADD_ITEM: 'ADD_ITEM',
+    DELETE_ITEM: 'DELETE_ITEM'
+};
+
+/**
+ * Добавление нового товара
+ * @param {string} title Название
+ * @param {string} barcode Штрихкод
+ */
+var addItem = exports.addItem = function addItem(title, barcode) {
+    return {
+        type: ActionTypes.ADD_ITEM,
+        title: title, barcode: barcode
+    };
+};
+
+/**
+ * Удаление товара по его id
+ * @param {number} id Ид.номер
+ */
+var deleteItem = exports.deleteItem = function deleteItem(id) {
+    return {
+        type: ActionTypes.DELETE_ITEM,
+        id: id
+    };
+};
+
+/***/ }),
+
 /***/ "./src/components/App.js":
 /*!*******************************!*\
   !*** ./src/components/App.js ***!
@@ -26488,6 +26563,10 @@ var _ItemList = __webpack_require__(/*! ./ItemList */ "./src/components/ItemList
 
 var _ItemList2 = _interopRequireDefault(_ItemList);
 
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _actions = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26511,10 +26590,14 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_NewItemForm2.default, null),
+                _react2.default.createElement(_NewItemForm2.default, { actionAdd: function actionAdd(title, barcode) {
+                        return _this2.props.dispatch((0, _actions.addItem)(title, barcode));
+                    } }),
                 _react2.default.createElement(_ItemList2.default, {
                     items: [{ id: 1, title: 'item title 1', barcode: '121212121212' }, { id: 2, title: 'item title 2', barcode: '232323232323' }, { id: 3, title: 'item title 3', barcode: '343434343434' }]
                 })
@@ -26525,7 +26608,9 @@ var App = function (_React$Component) {
     return App;
 }(_react2.default.Component);
 
-exports.default = App;
+exports.default = (0, _reactRedux.connect)(function (store) {
+    return store;
+})(App);
 
 /***/ }),
 
@@ -26621,7 +26706,7 @@ var Item = function (_React$Component) {
                     null,
                     _react2.default.createElement(
                         DeleteButton,
-                        null,
+                        { onClick: this.props.actionDelete },
                         'Delete'
                     )
                 )
@@ -26662,6 +26747,8 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
 var _ItemListHeader = __webpack_require__(/*! ./ItemListHeader */ "./src/components/ItemListHeader.js");
 
 var _ItemListHeader2 = _interopRequireDefault(_ItemListHeader);
@@ -26669,6 +26756,8 @@ var _ItemListHeader2 = _interopRequireDefault(_ItemListHeader);
 var _Item = __webpack_require__(/*! ./Item */ "./src/components/Item.js");
 
 var _Item2 = _interopRequireDefault(_Item);
+
+var _actions = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26698,6 +26787,9 @@ var ItemList = function (_React$Component) {
     _createClass(ItemList, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
+            console.log(this);
             return _react2.default.createElement(
                 'div',
                 null,
@@ -26710,7 +26802,10 @@ var ItemList = function (_React$Component) {
                             key: item.id,
                             number: item.id,
                             title: item.title,
-                            barcode: item.barcode
+                            barcode: item.barcode,
+                            actionDelete: function actionDelete() {
+                                _this2.props.dispatch((0, _actions.deleteItem)(item.id));
+                            }
                         });
                     })
                 )
@@ -26721,7 +26816,9 @@ var ItemList = function (_React$Component) {
     return ItemList;
 }(_react2.default.Component);
 
-exports.default = ItemList;
+exports.default = (0, _reactRedux.connect)(function (state) {
+    return state;
+})(ItemList);
 
 /***/ }),
 
@@ -26882,10 +26979,35 @@ var NewItemForm = function (_React$Component) {
     function NewItemForm() {
         _classCallCheck(this, NewItemForm);
 
-        return _possibleConstructorReturn(this, (NewItemForm.__proto__ || Object.getPrototypeOf(NewItemForm)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (NewItemForm.__proto__ || Object.getPrototypeOf(NewItemForm)).call(this));
+
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        return _this;
     }
 
+    /**
+     * Обработка отправки формы нового товара
+     * @param {Event} e 
+     */
+
+
     _createClass(NewItemForm, [{
+        key: 'handleSubmit',
+        value: function handleSubmit(e) {
+            e.preventDefault();
+
+            var titleElem = e.target.elements.title;
+            var barcodeElem = e.target.elements.barcode;
+
+            var title = titleElem.value;
+            var barcode = barcodeElem.value;
+
+            titleElem.value = '';
+            barcodeElem.value = '';
+
+            this.props.actionAdd(title, barcode);
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -26893,17 +27015,17 @@ var NewItemForm = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     'form',
-                    null,
+                    { onSubmit: this.handleSubmit },
                     _react2.default.createElement(EmptyCell, null),
                     _react2.default.createElement(
                         TitleCell,
                         null,
-                        _react2.default.createElement('input', { type: 'text', placeholder: 'Title' })
+                        _react2.default.createElement('input', { type: 'text', placeholder: 'Title', name: 'title' })
                     ),
                     _react2.default.createElement(
                         BarcodeCell,
                         null,
-                        _react2.default.createElement('input', { type: 'text', placeholder: 'barcode' })
+                        _react2.default.createElement('input', { type: 'text', placeholder: 'barcode', name: 'barcode' })
                     ),
                     _react2.default.createElement(
                         ActionCell,
@@ -26946,6 +27068,8 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 
 var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 
+var _reduxDevtoolsExtension = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
+
 var _reducers = __webpack_require__(/*! ./reducers */ "./src/reducers/index.js");
 
 var _reducers2 = _interopRequireDefault(_reducers);
@@ -26956,7 +27080,7 @@ var _App2 = _interopRequireDefault(_App);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_reducers2.default);
+var store = (0, _redux.createStore)(_reducers2.default, (0, _reduxDevtoolsExtension.devToolsEnhancer)());
 
 (0, _reactDom.render)(_react2.default.createElement(
     _reactRedux.Provider,
@@ -26977,13 +27101,71 @@ var store = (0, _redux.createStore)(_reducers2.default);
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-var tempReducer = function tempReducer(state, action) {
-  return state;
+
+var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+
+var _items = __webpack_require__(/*! ./items */ "./src/reducers/items.js");
+
+var _items2 = _interopRequireDefault(_items);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+    items: _items2.default
+});
+
+/***/ }),
+
+/***/ "./src/reducers/items.js":
+/*!*******************************!*\
+  !*** ./src/reducers/items.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _actions = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+/**
+ * Редьюсер товаров, добавляет и удаляет по событию.
+ * @param {Array} state Массив товаров
+ * @param {object} action 
+ */
+var items = function items() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+    console.log(state, action);
+    switch (action.type) {
+        case _actions.ActionTypes.ADD_ITEM:
+            var lastId = state.length ? state[state.length - 1].id + 1 : 1;
+            return [].concat(_toConsumableArray(state), [{
+                id: lastId,
+                title: action.title,
+                barcode: action.barcode
+            }]);
+
+        case _actions.ActionTypes.DELETE_ITEM:
+            return state.filter(function (item) {
+                return item.id != action.id;
+            });
+
+        default:
+            return state;
+    }
 };
 
-exports.default = tempReducer;
+exports.default = items;
 
 /***/ })
 

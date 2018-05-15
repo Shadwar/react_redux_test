@@ -54,7 +54,7 @@ class Item extends React.Component {
             <TitleCell>{this.props.title}</TitleCell>
             <BarcodeCell>{this.props.barcode}</BarcodeCell>
             <ActionCell>
-                <DeleteButton>Delete</DeleteButton>
+                <DeleteButton onClick={this.props.actionDelete}>Delete</DeleteButton>
             </ActionCell>
         </Li>
     )}

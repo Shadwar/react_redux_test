@@ -1,3 +1,6 @@
-let tempReducer = (state, action) => state;
+import { combineReducers } from 'redux';
+import items from './items';
 
-export default tempReducer;
+export default combineReducers({
+    items
+});

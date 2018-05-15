@@ -40,15 +40,39 @@ const ActionCell = TitleCell.extend`
  * Форма добавления нового товара
  */
 class NewItemForm extends React.Component {
+    constructor() {
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    /**
+     * Обработка отправки формы нового товара
+     * @param {Event} e 
+     */
+    handleSubmit(e) {
+        e.preventDefault();
+
+        const titleElem = e.target.elements.title;
+        const barcodeElem = e.target.elements.barcode;
+
+        const title = titleElem.value;
+        const barcode = barcodeElem.value;
+
+        titleElem.value = '';
+        barcodeElem.value = '';
+        
+        this.props.actionAdd(title, barcode);
+    }
+
     render() { return (
         <div>
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <EmptyCell></EmptyCell>
                 <TitleCell>
-                    <input type="text" placeholder="Title" />
+                    <input type="text" placeholder="Title" name="title"/>
                 </TitleCell>
                 <BarcodeCell>
-                    <input type="text" placeholder="barcode" />
+                    <input type="text" placeholder="barcode" name="barcode"/>
                 </BarcodeCell>
                 <ActionCell>
                     <AddButton>Add</AddButton>
