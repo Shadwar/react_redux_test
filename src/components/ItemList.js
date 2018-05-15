@@ -9,14 +9,22 @@ const Ul = styled.ul`
     padding: 0;
 `;
 
+/**
+ * Список товаров, выводит заголовок таблицы и все товары.
+ */
 class ItemList extends React.Component {
     render() { return (
         <div>
             <ItemListHeader/>
             <Ul>
-                <Item />
-                <Item />
-                <Item />
+                {this.props.items.map(item =>
+                    <Item 
+                        key={item.id}
+                        number={item.id}
+                        title={item.title}
+                        barcode={item.barcode}
+                    />
+                )}
             </Ul>
         </div>
     );}

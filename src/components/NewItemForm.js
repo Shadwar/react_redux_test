@@ -36,7 +36,9 @@ const ActionCell = TitleCell.extend`
 `;
 
 
-
+/**
+ * Форма добавления нового товара
+ */
 class NewItemForm extends React.Component {
     render() { return (
         <div>

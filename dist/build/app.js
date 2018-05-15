@@ -26496,6 +26496,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * Главный класс приложения.
+ */
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
@@ -26512,7 +26515,9 @@ var App = function (_React$Component) {
                 'div',
                 null,
                 _react2.default.createElement(_NewItemForm2.default, null),
-                _react2.default.createElement(_ItemList2.default, null)
+                _react2.default.createElement(_ItemList2.default, {
+                    items: [{ id: 1, title: 'item title 1', barcode: '121212121212' }, { id: 2, title: 'item title 2', barcode: '232323232323' }, { id: 3, title: 'item title 3', barcode: '343434343434' }]
+                })
             );
         }
     }]);
@@ -26577,6 +26582,10 @@ var ActionCell = Cell.extend(_templateObject5);
 
 var DeleteButton = _styledComponents2.default.button(_templateObject6);
 
+/**
+ * Элемент списка товаров, вывод свой номер, название и штрихкод.
+ */
+
 var Item = function (_React$Component) {
     _inherits(Item, _React$Component);
 
@@ -26595,17 +26604,17 @@ var Item = function (_React$Component) {
                 _react2.default.createElement(
                     Cell,
                     null,
-                    '2'
+                    this.props.number
                 ),
                 _react2.default.createElement(
                     TitleCell,
                     null,
-                    'Item title 2'
+                    this.props.title
                 ),
                 _react2.default.createElement(
                     BarcodeCell,
                     null,
-                    '232323232323'
+                    this.props.barcode
                 ),
                 _react2.default.createElement(
                     ActionCell,
@@ -26673,6 +26682,10 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var Ul = _styledComponents2.default.ul(_templateObject);
 
+/**
+ * Список товаров, выводит заголовок таблицы и все товары.
+ */
+
 var ItemList = function (_React$Component) {
     _inherits(ItemList, _React$Component);
 
@@ -26692,9 +26705,14 @@ var ItemList = function (_React$Component) {
                 _react2.default.createElement(
                     Ul,
                     null,
-                    _react2.default.createElement(_Item2.default, null),
-                    _react2.default.createElement(_Item2.default, null),
-                    _react2.default.createElement(_Item2.default, null)
+                    this.props.items.map(function (item) {
+                        return _react2.default.createElement(_Item2.default, {
+                            key: item.id,
+                            number: item.id,
+                            title: item.title,
+                            barcode: item.barcode
+                        });
+                    })
                 )
             );
         }
@@ -26753,6 +26771,10 @@ var TitleCell = NumberCell.extend(_templateObject2);
 var BarcodeCell = TitleCell.extend(_templateObject3);
 
 var ActionCell = TitleCell.extend(_templateObject4);
+
+/**
+ * Заголовок таблицы товаров
+ */
 
 var ItemListHeader = function (_React$Component) {
     _inherits(ItemListHeader, _React$Component);
@@ -26849,6 +26871,10 @@ var TitleCell = EmptyCell.extend(_templateObject3);
 var BarcodeCell = TitleCell.extend(_templateObject4);
 
 var ActionCell = TitleCell.extend(_templateObject5);
+
+/**
+ * Форма добавления нового товара
+ */
 
 var NewItemForm = function (_React$Component) {
     _inherits(NewItemForm, _React$Component);

@@ -44,12 +44,15 @@ const DeleteButton = styled.button`
 `;
 
 
+/**
+ * Элемент списка товаров, вывод свой номер, название и штрихкод.
+ */
 class Item extends React.Component {
     render() { return (
         <Li>
-            <Cell>2</Cell>
-            <TitleCell>Item title 2</TitleCell>
-            <BarcodeCell>232323232323</BarcodeCell>
+            <Cell>{this.props.number}</Cell>
+            <TitleCell>{this.props.title}</TitleCell>
+            <BarcodeCell>{this.props.barcode}</BarcodeCell>
             <ActionCell>
                 <DeleteButton>Delete</DeleteButton>
             </ActionCell>

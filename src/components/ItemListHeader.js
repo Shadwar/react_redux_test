@@ -27,6 +27,9 @@ const ActionCell = TitleCell.extend`
     width: 150px;
 `;
 
+/**
+ * Заголовок таблицы товаров
+ */
 class ItemListHeader extends React.Component {
     render() {
         return (
