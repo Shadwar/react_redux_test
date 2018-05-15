@@ -26988,12 +26988,12 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n    width: 100px;\n    height: 30px;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: green;\n'], ['\n    width: 100px;\n    height: 30px;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: green;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    width: 40px;\n    height: 40px;\n    padding: 5px;\n    display: inline-block;\n    border: 1px solid black;\n'], ['\n    width: 40px;\n    height: 40px;\n    padding: 5px;\n    display: inline-block;\n    border: 1px solid black;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    width: 350px;\n    text-transform: uppercase;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    margin-left: -1px;\n'], ['\n    width: 350px;\n    text-transform: uppercase;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    margin-left: -1px;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    width: 40px;\n    height: 40px;\n    padding: 5px;\n    display: inline-block;\n    border: 1px solid transparent;\n'], ['\n    width: 40px;\n    height: 40px;\n    padding: 5px;\n    display: inline-block;\n    border: 1px solid transparent;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    width: 350px;\n    border: 1px solid black;\n    text-transform: uppercase;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    margin-left: -1px;\n'], ['\n    width: 350px;\n    border: 1px solid black;\n    text-transform: uppercase;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    margin-left: -1px;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n    width: 250px;\n'], ['\n    width: 250px;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n    width: 150px;\n'], ['\n    width: 150px;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n    display: inline-block;\n'], ['\n    display: inline-block;\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n    width: 90%;\n    line-height: 18px;\n'], ['\n    width: 90%;\n    line-height: 18px;\n']);
+    _templateObject7 = _taggedTemplateLiteral(['\n    width: 90%;\n    line-height: 18px;\n\n    &.error {\n        border: 1px solid red;\n    }\n'], ['\n    width: 90%;\n    line-height: 18px;\n\n    &.error {\n        border: 1px solid red;\n    }\n']);
 
 var _styledComponents = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.es.js");
 
@@ -27044,7 +27044,8 @@ var NewItemForm = function (_React$Component) {
     }
 
     /**
-     * Обработка отправки формы нового товара
+     * Обработка отправки формы нового товара.
+     * Дополнительная проверка введенных данных.
      * @param {Event} e 
      */
 
@@ -27060,10 +27061,33 @@ var NewItemForm = function (_React$Component) {
             var title = titleElem.value;
             var barcode = barcodeElem.value;
 
+            var errors = false;
+            if (!title || title.length < 10) {
+                titleElem.classList.add('error');
+                errors = true;
+            }
+            if (!barcode || barcode.length < 10) {
+                barcodeElem.classList.add('error');
+                errors = true;
+            }
+
+            if (errors) return;
+
             titleElem.value = '';
             barcodeElem.value = '';
 
             this.props.actionAdd(title, barcode);
+        }
+
+        /**
+         * При вводе сбросить класс ошибки с поля ввода.
+         * @param {Event} e 
+         */
+
+    }, {
+        key: 'handleInput',
+        value: function handleInput(e) {
+            e.target.classList.remove('error');
         }
     }, {
         key: 'render',
@@ -27075,12 +27099,12 @@ var NewItemForm = function (_React$Component) {
                 _react2.default.createElement(
                     TitleCell,
                     null,
-                    _react2.default.createElement(Input, { type: 'text', placeholder: 'Title', name: 'title' })
+                    _react2.default.createElement(Input, { type: 'text', placeholder: 'Title', name: 'title', onInput: this.handleInput })
                 ),
                 _react2.default.createElement(
                     BarcodeCell,
                     null,
-                    _react2.default.createElement(Input, { type: 'text', placeholder: 'barcode', name: 'barcode' })
+                    _react2.default.createElement(Input, { type: 'text', placeholder: 'barcode', name: 'barcode', onInput: this.handleInput })
                 ),
                 _react2.default.createElement(
                     ActionCell,

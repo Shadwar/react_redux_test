@@ -14,11 +14,12 @@ const EmptyCell = styled.span`
     height: 40px;
     padding: 5px;
     display: inline-block;
-    border: 1px solid black;
+    border: 1px solid transparent;
 `;
 
 const TitleCell = EmptyCell.extend`
     width: 350px;
+    border: 1px solid black;
     text-transform: uppercase;
     font-size: 18px;
     line-height: 40px;
@@ -42,6 +43,10 @@ const Form = styled.form`
 const Input = styled.input`
     width: 90%;
     line-height: 18px;
+
+    &.error {
+        border: 1px solid red;
+    }
 `;
 
 
@@ -55,7 +60,8 @@ class NewItemForm extends React.Component {
     }
 
     /**
-     * Обработка отправки формы нового товара
+     * Обработка отправки формы нового товара.
+     * Дополнительная проверка введенных данных.
      * @param {Event} e 
      */
     handleSubmit(e) {
@@ -67,20 +73,40 @@ class NewItemForm extends React.Component {
         const title = titleElem.value;
         const barcode = barcodeElem.value;
 
+        let errors = false;
+        if (!title || title.length < 10) {
+            titleElem.classList.add('error');
+            errors = true;
+        }
+        if (!barcode || barcode.length < 10) {
+            barcodeElem.classList.add('error');
+            errors = true;
+        }
+
+        if (errors) return;
+
         titleElem.value = '';
         barcodeElem.value = '';
         
         this.props.actionAdd(title, barcode);
     }
 
+    /**
+     * При вводе сбросить класс ошибки с поля ввода.
+     * @param {Event} e 
+     */
+    handleInput(e) {
+        e.target.classList.remove('error');
+    }
+
     render() { return (
         <Form onSubmit={this.handleSubmit}>
             <EmptyCell></EmptyCell>
             <TitleCell>
-                <Input type="text" placeholder="Title" name="title"/>
+                <Input type="text" placeholder="Title" name="title" onInput={this.handleInput}/>
             </TitleCell>
             <BarcodeCell>
-                <Input type="text" placeholder="barcode" name="barcode"/>
+                <Input type="text" placeholder="barcode" name="barcode" onInput={this.handleInput}/>
             </BarcodeCell>
             <ActionCell>
                 <AddButton>Add</AddButton>
