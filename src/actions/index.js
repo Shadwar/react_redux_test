@@ -1,6 +1,7 @@
 export const ActionTypes = {
     ADD_ITEM: 'ADD_ITEM',
-    DELETE_ITEM: 'DELETE_ITEM'
+    DELETE_ITEM: 'DELETE_ITEM',
+    GET_ITEMS: 'GET_ITEMS'
 };
 
 /**
@@ -26,3 +27,11 @@ export const deleteItem = (id) => {
     }
 };
 
+/**
+ * Запрос товаров
+ */
+export const getItems = () => {
+    return {
+        type: ActionTypes.GET_ITEMS
+    }
+}

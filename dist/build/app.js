@@ -26507,7 +26507,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 var ActionTypes = exports.ActionTypes = {
     ADD_ITEM: 'ADD_ITEM',
-    DELETE_ITEM: 'DELETE_ITEM'
+    DELETE_ITEM: 'DELETE_ITEM',
+    GET_ITEMS: 'GET_ITEMS'
 };
 
 /**
@@ -26533,6 +26534,37 @@ var deleteItem = exports.deleteItem = function deleteItem(id) {
     };
 };
 
+/**
+ * Запрос товаров
+ */
+var getItems = exports.getItems = function getItems() {
+    return {
+        type: ActionTypes.GET_ITEMS
+    };
+};
+
+/***/ }),
+
+/***/ "./src/api.js":
+/*!********************!*\
+  !*** ./src/api.js ***!
+  \********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * Запрос к серверу для получения списка товаров
+ */
+var getItems = exports.getItems = function getItems() {
+    return [{ id: 1, title: 'Первый товар', barcode: '121212121212' }, { id: 2, title: 'Второй товар', barcode: '232323232323' }, { id: 3, title: 'Третий товар', barcode: '343434343434' }, { id: 4, title: 'Четвертый товар', barcode: '454545454545' }, { id: 5, title: 'Пятый товар', barcode: '565656565656' }, { id: 6, title: 'Шестой товар', barcode: '676767676767' }, { id: 7, title: 'Седьмой товар', barcode: '787878787878' }];
+};
+
 /***/ }),
 
 /***/ "./src/components/App.js":
@@ -26551,9 +26583,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _templateObject = _taggedTemplateLiteral(['\n    text-align: center;\n'], ['\n    text-align: center;\n']);
+
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.es.js");
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _NewItemForm = __webpack_require__(/*! ./NewItemForm */ "./src/components/NewItemForm.js");
 
@@ -26575,9 +26613,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var Wrapper = _styledComponents2.default.div(_templateObject);
+
 /**
  * Главный класс приложения.
  */
+
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
@@ -26593,14 +26636,12 @@ var App = function (_React$Component) {
             var _this2 = this;
 
             return _react2.default.createElement(
-                'div',
+                Wrapper,
                 null,
                 _react2.default.createElement(_NewItemForm2.default, { actionAdd: function actionAdd(title, barcode) {
                         return _this2.props.dispatch((0, _actions.addItem)(title, barcode));
                     } }),
-                _react2.default.createElement(_ItemList2.default, {
-                    items: [{ id: 1, title: 'item title 1', barcode: '121212121212' }, { id: 2, title: 'item title 2', barcode: '232323232323' }, { id: 3, title: 'item title 3', barcode: '343434343434' }]
-                })
+                _react2.default.createElement(_ItemList2.default, null)
             );
         }
     }]);
@@ -26737,7 +26778,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n    margin: 0;\n    padding: 0;\n'], ['\n    margin: 0;\n    padding: 0;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n    margin: 0;\n    padding: 0;\n'], ['\n    margin: 0;\n    padding: 0;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    display: inline-block;\n'], ['\n    display: inline-block;\n']);
 
 var _styledComponents = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.es.js");
 
@@ -26771,6 +26813,8 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var Ul = _styledComponents2.default.ul(_templateObject);
 
+var Wrapper = _styledComponents2.default.div(_templateObject2);
+
 /**
  * Список товаров, выводит заголовок таблицы и все товары.
  */
@@ -26785,13 +26829,21 @@ var ItemList = function (_React$Component) {
     }
 
     _createClass(ItemList, [{
+        key: 'componentWillMount',
+
+        /**
+         * Перед тем, как список отобразится - сделать запрос итемов
+         */
+        value: function componentWillMount() {
+            this.props.dispatch((0, _actions.getItems)());
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
-            console.log(this);
             return _react2.default.createElement(
-                'div',
+                Wrapper,
                 null,
                 _react2.default.createElement(_ItemListHeader2.default, null),
                 _react2.default.createElement(
@@ -26939,7 +26991,9 @@ var _templateObject = _taggedTemplateLiteral(['\n    width: 100px;\n    height: 
     _templateObject2 = _taggedTemplateLiteral(['\n    width: 40px;\n    height: 40px;\n    padding: 5px;\n    display: inline-block;\n    border: 1px solid black;\n'], ['\n    width: 40px;\n    height: 40px;\n    padding: 5px;\n    display: inline-block;\n    border: 1px solid black;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n    width: 350px;\n    text-transform: uppercase;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    margin-left: -1px;\n'], ['\n    width: 350px;\n    text-transform: uppercase;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    margin-left: -1px;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n    width: 250px;\n'], ['\n    width: 250px;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n    width: 150px;\n'], ['\n    width: 150px;\n']);
+    _templateObject5 = _taggedTemplateLiteral(['\n    width: 150px;\n'], ['\n    width: 150px;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n    display: inline-block;\n'], ['\n    display: inline-block;\n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n    width: 90%;\n    line-height: 18px;\n'], ['\n    width: 90%;\n    line-height: 18px;\n']);
 
 var _styledComponents = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.es.js");
 
@@ -26968,6 +27022,10 @@ var TitleCell = EmptyCell.extend(_templateObject3);
 var BarcodeCell = TitleCell.extend(_templateObject4);
 
 var ActionCell = TitleCell.extend(_templateObject5);
+
+var Form = _styledComponents2.default.form(_templateObject6);
+
+var Input = _styledComponents2.default.input(_templateObject7);
 
 /**
  * Форма добавления нового товара
@@ -27011,30 +27069,26 @@ var NewItemForm = function (_React$Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                null,
+                Form,
+                { onSubmit: this.handleSubmit },
+                _react2.default.createElement(EmptyCell, null),
                 _react2.default.createElement(
-                    'form',
-                    { onSubmit: this.handleSubmit },
-                    _react2.default.createElement(EmptyCell, null),
+                    TitleCell,
+                    null,
+                    _react2.default.createElement(Input, { type: 'text', placeholder: 'Title', name: 'title' })
+                ),
+                _react2.default.createElement(
+                    BarcodeCell,
+                    null,
+                    _react2.default.createElement(Input, { type: 'text', placeholder: 'barcode', name: 'barcode' })
+                ),
+                _react2.default.createElement(
+                    ActionCell,
+                    null,
                     _react2.default.createElement(
-                        TitleCell,
+                        AddButton,
                         null,
-                        _react2.default.createElement('input', { type: 'text', placeholder: 'Title', name: 'title' })
-                    ),
-                    _react2.default.createElement(
-                        BarcodeCell,
-                        null,
-                        _react2.default.createElement('input', { type: 'text', placeholder: 'barcode', name: 'barcode' })
-                    ),
-                    _react2.default.createElement(
-                        ActionCell,
-                        null,
-                        _react2.default.createElement(
-                            AddButton,
-                            null,
-                            'Add'
-                        )
+                        'Add'
                     )
                 )
             );
@@ -27134,6 +27188,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _actions = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
 
+var _api = __webpack_require__(/*! ../api */ "./src/api.js");
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /**
@@ -27145,7 +27201,6 @@ var items = function items() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var action = arguments[1];
 
-    console.log(state, action);
     switch (action.type) {
         case _actions.ActionTypes.ADD_ITEM:
             var lastId = state.length ? state[state.length - 1].id + 1 : 1;
@@ -27159,6 +27214,9 @@ var items = function items() {
             return state.filter(function (item) {
                 return item.id != action.id;
             });
+
+        case _actions.ActionTypes.GET_ITEMS:
+            return [].concat(_toConsumableArray(state), _toConsumableArray((0, _api.getItems)()));
 
         default:
             return state;

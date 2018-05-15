@@ -35,6 +35,15 @@ const ActionCell = TitleCell.extend`
     width: 150px;
 `;
 
+const Form = styled.form`
+    display: inline-block;
+`;
+
+const Input = styled.input`
+    width: 90%;
+    line-height: 18px;
+`;
+
 
 /**
  * Форма добавления нового товара
@@ -65,20 +74,18 @@ class NewItemForm extends React.Component {
     }
 
     render() { return (
-        <div>
-            <form onSubmit={this.handleSubmit}>
-                <EmptyCell></EmptyCell>
-                <TitleCell>
-                    <input type="text" placeholder="Title" name="title"/>
-                </TitleCell>
-                <BarcodeCell>
-                    <input type="text" placeholder="barcode" name="barcode"/>
-                </BarcodeCell>
-                <ActionCell>
-                    <AddButton>Add</AddButton>
-                </ActionCell>
-            </form>
-        </div>
+        <Form onSubmit={this.handleSubmit}>
+            <EmptyCell></EmptyCell>
+            <TitleCell>
+                <Input type="text" placeholder="Title" name="title"/>
+            </TitleCell>
+            <BarcodeCell>
+                <Input type="text" placeholder="barcode" name="barcode"/>
+            </BarcodeCell>
+            <ActionCell>
+                <AddButton>Add</AddButton>
+            </ActionCell>
+        </Form>
     );}
 }
 

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, dispatch } from 'react-redux';
 import ItemListHeader from './ItemListHeader';
 import Item from './Item';
-import {addItem, deleteItem} from '../actions';
+import { deleteItem, getItems } from '../actions';
 
 
 const Ul = styled.ul`
@@ -11,14 +11,23 @@ const Ul = styled.ul`
     padding: 0;
 `;
 
+const Wrapper = styled.div`
+    display: inline-block;
+`;
+
 /**
  * Список товаров, выводит заголовок таблицы и все товары.
  */
 class ItemList extends React.Component {
-    render() { 
-        console.log(this);
-        return (
-        <div>
+    /**
+     * Перед тем, как список отобразится - сделать запрос итемов
+     */
+    componentWillMount() {
+        this.props.dispatch(getItems());
+    }
+
+    render() { return (
+        <Wrapper>
             <ItemListHeader/>
             <Ul>
                 {this.props.items.map(item =>
@@ -33,7 +42,7 @@ class ItemList extends React.Component {
                     />
                 )}
             </Ul>
-        </div>
+        </Wrapper>
     );}
 }
 

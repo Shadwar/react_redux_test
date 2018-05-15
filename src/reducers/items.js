@@ -1,4 +1,5 @@
 import { ActionTypes } from '../actions';
+import { getItems } from '../api';
 
 /**
  * Редьюсер товаров, добавляет и удаляет по событию.
@@ -6,7 +7,6 @@ import { ActionTypes } from '../actions';
  * @param {object} action 
  */
 const items = (state=[], action) => {
-    console.log(state, action);
     switch (action.type) {
         case ActionTypes.ADD_ITEM:
             const lastId = state.length ? state[state.length-1].id + 1 : 1;
@@ -20,6 +20,9 @@ const items = (state=[], action) => {
 
         case ActionTypes.DELETE_ITEM:
             return state.filter((item) => item.id != action.id);
+        
+        case ActionTypes.GET_ITEMS:
+            return [...state, ...getItems()];
 
         default:
             return state;
