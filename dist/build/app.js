@@ -26476,23 +26476,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n    width: 100px;\n    height: 30px;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: green;\n'], ['\n    width: 100px;\n    height: 30px;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: green;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    color: red;\n'], ['\n    color: red;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    width: 40px;\n    height: 40px;\n    text-transform: uppercase;\n    display: inline-block;\n    border: 1px solid black;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    padding: 5px;\n'], ['\n    width: 40px;\n    height: 40px;\n    text-transform: uppercase;\n    display: inline-block;\n    border: 1px solid black;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    padding: 5px;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n    margin-left: -1px;\n    width: 350px;\n'], ['\n    margin-left: -1px;\n    width: 350px;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n    line-height: 18px;\n    text-align: left;\n'], ['\n    line-height: 18px;\n    text-align: left;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n    width: 150px;\n'], ['\n    width: 150px;\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n    width: 250px;\n'], ['\n    width: 250px;\n']),
-    _templateObject8 = _taggedTemplateLiteral(['\n    list-style: none;\n'], ['\n    list-style: none;\n']),
-    _templateObject9 = _taggedTemplateLiteral(['\n    margin: 0;\n    padding: 0;\n'], ['\n    margin: 0;\n    padding: 0;\n']);
-
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.es.js");
+var _NewItemForm = __webpack_require__(/*! ./NewItemForm */ "./src/components/NewItemForm.js");
 
-var _styledComponents2 = _interopRequireDefault(_styledComponents);
+var _NewItemForm2 = _interopRequireDefault(_NewItemForm);
+
+var _ItemList = __webpack_require__(/*! ./ItemList */ "./src/components/ItemList.js");
+
+var _ItemList2 = _interopRequireDefault(_ItemList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26501,26 +26495,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-var AddButton = _styledComponents2.default.button(_templateObject);
-
-var DeleteButton = AddButton.extend(_templateObject2);
-
-var NumberCell = _styledComponents2.default.span(_templateObject3);
-
-var TitleHeaderCell = NumberCell.extend(_templateObject4);
-
-var TitleItemCell = TitleHeaderCell.extend(_templateObject5);
-
-var ActionCell = NumberCell.extend(_templateObject6);
-
-var BarcodeCell = TitleHeaderCell.extend(_templateObject7);
-
-var Item = _styledComponents2.default.li(_templateObject8);
-
-var ItemList = _styledComponents2.default.ul(_templateObject9);
 
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
@@ -26537,150 +26511,8 @@ var App = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                        'form',
-                        null,
-                        _react2.default.createElement(NumberCell, null),
-                        _react2.default.createElement(
-                            TitleHeaderCell,
-                            null,
-                            _react2.default.createElement('input', { type: 'text', placeholder: 'Title' })
-                        ),
-                        _react2.default.createElement(
-                            BarcodeCell,
-                            null,
-                            _react2.default.createElement('input', { type: 'text', placeholder: 'barcode' })
-                        ),
-                        _react2.default.createElement(
-                            ActionCell,
-                            null,
-                            _react2.default.createElement(
-                                AddButton,
-                                null,
-                                'Add'
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(
-                            NumberCell,
-                            null,
-                            '\u2116'
-                        ),
-                        _react2.default.createElement(
-                            TitleHeaderCell,
-                            null,
-                            'Title'
-                        ),
-                        _react2.default.createElement(
-                            BarcodeCell,
-                            null,
-                            'Barcode'
-                        ),
-                        _react2.default.createElement(
-                            ActionCell,
-                            null,
-                            'Actions'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        ItemList,
-                        null,
-                        _react2.default.createElement(
-                            Item,
-                            null,
-                            _react2.default.createElement(
-                                NumberCell,
-                                null,
-                                '2'
-                            ),
-                            _react2.default.createElement(
-                                TitleItemCell,
-                                null,
-                                'Item title 2'
-                            ),
-                            _react2.default.createElement(
-                                BarcodeCell,
-                                null,
-                                '232323232323'
-                            ),
-                            _react2.default.createElement(
-                                ActionCell,
-                                null,
-                                _react2.default.createElement(
-                                    DeleteButton,
-                                    null,
-                                    'Delete'
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            Item,
-                            null,
-                            _react2.default.createElement(
-                                NumberCell,
-                                null,
-                                '2'
-                            ),
-                            _react2.default.createElement(
-                                TitleItemCell,
-                                null,
-                                'Item title 2'
-                            ),
-                            _react2.default.createElement(
-                                BarcodeCell,
-                                null,
-                                '232323232323'
-                            ),
-                            _react2.default.createElement(
-                                ActionCell,
-                                null,
-                                _react2.default.createElement(
-                                    DeleteButton,
-                                    null,
-                                    'Delete'
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            Item,
-                            null,
-                            _react2.default.createElement(
-                                NumberCell,
-                                null,
-                                '1'
-                            ),
-                            _react2.default.createElement(
-                                TitleItemCell,
-                                null,
-                                'Item title 3'
-                            ),
-                            _react2.default.createElement(
-                                BarcodeCell,
-                                null,
-                                '343434343434'
-                            ),
-                            _react2.default.createElement(
-                                ActionCell,
-                                null,
-                                _react2.default.createElement(
-                                    DeleteButton,
-                                    null,
-                                    'Delete'
-                                )
-                            )
-                        )
-                    )
-                )
+                _react2.default.createElement(_NewItemForm2.default, null),
+                _react2.default.createElement(_ItemList2.default, null)
             );
         }
     }]);
@@ -26689,6 +26521,382 @@ var App = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = App;
+
+/***/ }),
+
+/***/ "./src/components/Item.js":
+/*!********************************!*\
+  !*** ./src/components/Item.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n    list-style: none;\n'], ['\n    list-style: none;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    width: 40px;\n    height: 40px;\n    text-transform: uppercase;\n    display: inline-block;\n    border: 1px solid black;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    padding: 5px;\n'], ['\n    width: 40px;\n    height: 40px;\n    text-transform: uppercase;\n    display: inline-block;\n    border: 1px solid black;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    padding: 5px;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    margin-left: -1px;\n    width: 350px;\n    line-height: 18px;\n    text-align: left;\n'], ['\n    margin-left: -1px;\n    width: 350px;\n    line-height: 18px;\n    text-align: left;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    margin-left: -1px;\n    width: 250px;\n'], ['\n    margin-left: -1px;\n    width: 250px;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n    margin-left: -1px;\n    width: 150px;\n'], ['\n    margin-left: -1px;\n    width: 150px;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n    width: 100px;\n    height: 30px;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: red;\n'], ['\n    width: 100px;\n    height: 30px;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: red;\n']);
+
+var _styledComponents = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.es.js");
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var Li = _styledComponents2.default.li(_templateObject);
+
+var Cell = _styledComponents2.default.span(_templateObject2);
+
+var TitleCell = Cell.extend(_templateObject3);
+
+var BarcodeCell = Cell.extend(_templateObject4);
+
+var ActionCell = Cell.extend(_templateObject5);
+
+var DeleteButton = _styledComponents2.default.button(_templateObject6);
+
+var Item = function (_React$Component) {
+    _inherits(Item, _React$Component);
+
+    function Item() {
+        _classCallCheck(this, Item);
+
+        return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).apply(this, arguments));
+    }
+
+    _createClass(Item, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                Li,
+                null,
+                _react2.default.createElement(
+                    Cell,
+                    null,
+                    '2'
+                ),
+                _react2.default.createElement(
+                    TitleCell,
+                    null,
+                    'Item title 2'
+                ),
+                _react2.default.createElement(
+                    BarcodeCell,
+                    null,
+                    '232323232323'
+                ),
+                _react2.default.createElement(
+                    ActionCell,
+                    null,
+                    _react2.default.createElement(
+                        DeleteButton,
+                        null,
+                        'Delete'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Item;
+}(_react2.default.Component);
+
+exports.default = Item;
+
+/***/ }),
+
+/***/ "./src/components/ItemList.js":
+/*!************************************!*\
+  !*** ./src/components/ItemList.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n    margin: 0;\n    padding: 0;\n'], ['\n    margin: 0;\n    padding: 0;\n']);
+
+var _styledComponents = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.es.js");
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ItemListHeader = __webpack_require__(/*! ./ItemListHeader */ "./src/components/ItemListHeader.js");
+
+var _ItemListHeader2 = _interopRequireDefault(_ItemListHeader);
+
+var _Item = __webpack_require__(/*! ./Item */ "./src/components/Item.js");
+
+var _Item2 = _interopRequireDefault(_Item);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var Ul = _styledComponents2.default.ul(_templateObject);
+
+var ItemList = function (_React$Component) {
+    _inherits(ItemList, _React$Component);
+
+    function ItemList() {
+        _classCallCheck(this, ItemList);
+
+        return _possibleConstructorReturn(this, (ItemList.__proto__ || Object.getPrototypeOf(ItemList)).apply(this, arguments));
+    }
+
+    _createClass(ItemList, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_ItemListHeader2.default, null),
+                _react2.default.createElement(
+                    Ul,
+                    null,
+                    _react2.default.createElement(_Item2.default, null),
+                    _react2.default.createElement(_Item2.default, null),
+                    _react2.default.createElement(_Item2.default, null)
+                )
+            );
+        }
+    }]);
+
+    return ItemList;
+}(_react2.default.Component);
+
+exports.default = ItemList;
+
+/***/ }),
+
+/***/ "./src/components/ItemListHeader.js":
+/*!******************************************!*\
+  !*** ./src/components/ItemListHeader.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n    width: 40px;\n    height: 40px;\n    text-transform: uppercase;\n    display: inline-block;\n    border: 1px solid black;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    padding: 5px;\n'], ['\n    width: 40px;\n    height: 40px;\n    text-transform: uppercase;\n    display: inline-block;\n    border: 1px solid black;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    padding: 5px;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    margin-left: -1px;\n    width: 350px;\n'], ['\n    margin-left: -1px;\n    width: 350px;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    width: 250px;\n'], ['\n    width: 250px;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    width: 150px;\n'], ['\n    width: 150px;\n']);
+
+var _styledComponents = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.es.js");
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var NumberCell = _styledComponents2.default.span(_templateObject);
+
+var TitleCell = NumberCell.extend(_templateObject2);
+
+var BarcodeCell = TitleCell.extend(_templateObject3);
+
+var ActionCell = TitleCell.extend(_templateObject4);
+
+var ItemListHeader = function (_React$Component) {
+    _inherits(ItemListHeader, _React$Component);
+
+    function ItemListHeader() {
+        _classCallCheck(this, ItemListHeader);
+
+        return _possibleConstructorReturn(this, (ItemListHeader.__proto__ || Object.getPrototypeOf(ItemListHeader)).apply(this, arguments));
+    }
+
+    _createClass(ItemListHeader, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    NumberCell,
+                    null,
+                    '\u2116'
+                ),
+                _react2.default.createElement(
+                    TitleCell,
+                    null,
+                    'Title'
+                ),
+                _react2.default.createElement(
+                    BarcodeCell,
+                    null,
+                    'Barcode'
+                ),
+                _react2.default.createElement(
+                    ActionCell,
+                    null,
+                    'Actions'
+                )
+            );
+        }
+    }]);
+
+    return ItemListHeader;
+}(_react2.default.Component);
+
+exports.default = ItemListHeader;
+
+/***/ }),
+
+/***/ "./src/components/NewItemForm.js":
+/*!***************************************!*\
+  !*** ./src/components/NewItemForm.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n    width: 100px;\n    height: 30px;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: green;\n'], ['\n    width: 100px;\n    height: 30px;\n    font-size: 18px;\n    text-transform: uppercase;\n    color: green;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    width: 40px;\n    height: 40px;\n    padding: 5px;\n    display: inline-block;\n    border: 1px solid black;\n'], ['\n    width: 40px;\n    height: 40px;\n    padding: 5px;\n    display: inline-block;\n    border: 1px solid black;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    width: 350px;\n    text-transform: uppercase;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    margin-left: -1px;\n'], ['\n    width: 350px;\n    text-transform: uppercase;\n    font-size: 18px;\n    line-height: 40px;\n    text-align: center;\n    vertical-align: top;\n    margin-left: -1px;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    width: 250px;\n'], ['\n    width: 250px;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n    width: 150px;\n'], ['\n    width: 150px;\n']);
+
+var _styledComponents = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.es.js");
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var AddButton = _styledComponents2.default.button(_templateObject);
+
+var EmptyCell = _styledComponents2.default.span(_templateObject2);
+
+var TitleCell = EmptyCell.extend(_templateObject3);
+
+var BarcodeCell = TitleCell.extend(_templateObject4);
+
+var ActionCell = TitleCell.extend(_templateObject5);
+
+var NewItemForm = function (_React$Component) {
+    _inherits(NewItemForm, _React$Component);
+
+    function NewItemForm() {
+        _classCallCheck(this, NewItemForm);
+
+        return _possibleConstructorReturn(this, (NewItemForm.__proto__ || Object.getPrototypeOf(NewItemForm)).apply(this, arguments));
+    }
+
+    _createClass(NewItemForm, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'form',
+                    null,
+                    _react2.default.createElement(EmptyCell, null),
+                    _react2.default.createElement(
+                        TitleCell,
+                        null,
+                        _react2.default.createElement('input', { type: 'text', placeholder: 'Title' })
+                    ),
+                    _react2.default.createElement(
+                        BarcodeCell,
+                        null,
+                        _react2.default.createElement('input', { type: 'text', placeholder: 'barcode' })
+                    ),
+                    _react2.default.createElement(
+                        ActionCell,
+                        null,
+                        _react2.default.createElement(
+                            AddButton,
+                            null,
+                            'Add'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return NewItemForm;
+}(_react2.default.Component);
+
+exports.default = NewItemForm;
 
 /***/ }),
 
