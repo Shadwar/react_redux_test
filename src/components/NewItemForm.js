@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 const AddButton = styled.button`
     width: 100px;
@@ -114,5 +116,9 @@ class NewItemForm extends React.Component {
         </Form>
     );}
 }
+
+NewItemForm.propTypes = {
+    actionAdd: PropTypes.func.isRequired
+};
 
 export default NewItemForm;

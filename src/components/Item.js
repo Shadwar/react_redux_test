@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 const Li = styled.li`
     list-style: none;
@@ -59,5 +61,11 @@ class Item extends React.Component {
         </Li>
     )}
 }
+
+Item.propTypes = {
+    number: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    barcode: PropTypes.string.isRequired
+};
 
 export default Item;

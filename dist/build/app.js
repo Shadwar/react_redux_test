@@ -26686,6 +26686,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26758,6 +26762,12 @@ var Item = function (_React$Component) {
     return Item;
 }(_react2.default.Component);
 
+Item.propTypes = {
+    number: _propTypes2.default.number.isRequired,
+    title: _propTypes2.default.string.isRequired,
+    barcode: _propTypes2.default.string.isRequired
+};
+
 exports.default = Item;
 
 /***/ }),
@@ -26788,6 +26798,10 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
@@ -26867,6 +26881,10 @@ var ItemList = function (_React$Component) {
 
     return ItemList;
 }(_react2.default.Component);
+
+ItemList.propTypes = {
+    items: _propTypes2.default.array.isRequired
+};
 
 exports.default = (0, _reactRedux.connect)(function (state) {
     return state;
@@ -27003,6 +27021,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27121,6 +27143,10 @@ var NewItemForm = function (_React$Component) {
 
     return NewItemForm;
 }(_react2.default.Component);
+
+NewItemForm.propTypes = {
+    actionAdd: _propTypes2.default.func.isRequired
+};
 
 exports.default = NewItemForm;
 

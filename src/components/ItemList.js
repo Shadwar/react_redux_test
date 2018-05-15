@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect, dispatch } from 'react-redux';
 import ItemListHeader from './ItemListHeader';
 import Item from './Item';
@@ -45,5 +46,9 @@ class ItemList extends React.Component {
         </Wrapper>
     );}
 }
+
+ItemList.propTypes = {
+    items: PropTypes.array.isRequired
+};
 
 export default connect(state => state)(ItemList);
